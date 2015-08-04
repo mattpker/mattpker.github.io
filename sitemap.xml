@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mattpker.com/about/index.html</loc>
+    <lastmod>2015-08-04T21:24:09.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mattpker.com/2015/07/06/My-Editor-Atom/</loc>
+    <lastmod>2015-07-14T21:26:06.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mattpker.com/2015/07/06/My-Blog/</loc>
     <lastmod>2015-07-06T23:06:09.000Z</lastmod>
   </url>
@@ -9,16 +19,6 @@
   <url>
     <loc>http://mattpker.com/tags/index.html</loc>
     <lastmod>2015-07-06T21:05:15.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mattpker.com/2015/07/06/My-Editor-Atom/</loc>
-    <lastmod>2015-07-06T20:58:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mattpker.com/about/index.html</loc>
-    <lastmod>2015-07-06T18:02:10.000Z</lastmod>
   </url>
   
 </urlset>
