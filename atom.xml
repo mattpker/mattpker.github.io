@@ -5,7 +5,7 @@
   <subtitle><![CDATA[A developers blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mattpker.com//"/>
-  <updated>2015-08-07T23:57:36.000Z</updated>
+  <updated>2015-08-13T20:16:57.000Z</updated>
   <id>http://mattpker.com//</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://mattpker.com/2015/08/07/How-to-schedule-jobs-in-NodeJS/"/>
     <id>http://mattpker.com/2015/08/07/How-to-schedule-jobs-in-NodeJS/</id>
     <published>2015-08-07T23:12:44.000Z</published>
-    <updated>2015-08-07T23:57:36.000Z</updated>
+    <updated>2015-08-13T20:16:57.000Z</updated>
     <content type="html"><![CDATA[<p>When dealing with large applications there are a lot of cases where you need some sort of scheduled task or cron job. Modifying these and redeploying them can be a pain as they are separate from your service/code. In addition, making sure the correct version of your software and the cron jobs are running on the right servers can add headache to troubleshooting.</p>
 <p>Since your NodeJS service is an always running process, and you have things like setTimeout and setInterval at your disposal, setting these up in your NodeJS service can solve all these problems. Additionally, since you already have all your models set up, doing cleanup tasks on your databases or caches are a breeze.</p>
 <p>While developing these tasks, I realized that if and when I cluster these services, I will run into an issue where multiple tasks will run at the same time, and this was not a good thing. I searched for a while for a solution but I could not find anything, so I decided to write it myself.</p>
+<a id="more"></a>
 <h2 id="is-master">is-master</h2><p><a href="https://www.npmjs.com/package/is-master" target="_blank" rel="external">https://www.npmjs.com/package/is-master</a><br><a href="https://github.com/mattpker/node-is-master" target="_blank" rel="external">https://github.com/mattpker/node-is-master</a></p>
 <p>is-master uses an existing mongoose singleton as its “cache”, since most projects I work on already have this running. It is very simple to use; all you need to do is require the module, start the worker process, and then you can check if the process is the master.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'../node_modules/mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> im = <span class="built_in">require</span>(<span class="string">'../is-master.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start the mongoose db connection</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://127.0.0.1:27017/im'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">'\x1b[31m'</span>, <span class="string">'Could not connect to MongoDB!'</span>);</span><br><span class="line">        <span class="keyword">throw</span> (err);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start the is-master worker</span></span><br><span class="line">im.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check if this current process is the master</span></span><br><span class="line"><span class="keyword">if</span> (im.master) &#123;</span><br><span class="line">    <span class="comment">// Do stuff here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -37,7 +38,10 @@
 <p>I hope this helps, let me know in the comments if you have any issues or suggestions.</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>When dealing with large applications there are a lot of cases where you need some sort of scheduled task or cron job. Modifying these and]]>
+    <![CDATA[<p>When dealing with large applications there are a lot of cases where you need some sort of scheduled task or cron job. Modifying these and redeploying them can be a pain as they are separate from your service/code. In addition, making sure the correct version of your software and the cron jobs are running on the right servers can add headache to troubleshooting.</p>
+<p>Since your NodeJS service is an always running process, and you have things like setTimeout and setInterval at your disposal, setting these up in your NodeJS service can solve all these problems. Additionally, since you already have all your models set up, doing cleanup tasks on your databases or caches are a breeze.</p>
+<p>While developing these tasks, I realized that if and when I cluster these services, I will run into an issue where multiple tasks will run at the same time, and this was not a good thing. I searched for a while for a solution but I could not find anything, so I decided to write it myself.</p>]]>
+    
     </summary>
     
       <category term="Node.js" scheme="http://mattpker.com/tags/Node-js/"/>
@@ -51,13 +55,14 @@
     <link href="http://mattpker.com/2015/07/06/My-Editor-Atom/"/>
     <id>http://mattpker.com/2015/07/06/My-Editor-Atom/</id>
     <published>2015-07-06T18:04:10.000Z</published>
-    <updated>2015-07-14T21:26:06.000Z</updated>
+    <updated>2015-08-13T20:17:44.000Z</updated>
     <content type="html"><![CDATA[<center><img src="/images/atom.png" style="border:0px"></center>
 
 <p>Coming from a background in Linux server administration, of course my first editor was Vim. I really like Vim as a basic editor, but when I started programing it really did not fit my needs. I realize that you can highly customize Vim and make it much like “modern” editors of today, this just seemed way to complex for me and I wanted something a bit more user friendly with mouse support.</p>
 <p>The editor everyone recommended to me was <a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime 2</a>. I enjoyed the look and feel of Sublime, but it still did not seem as user friendly that I hoped. Even so, I decided to go ahead with it as it seemed to be the best option at that time.</p>
 <p>I used Sublime 2 as my primary editor for about 2 years. I had it very customized to my liking and I was very confortable with it. So changing editors at this point was not even on my radar.</p>
 <p>About 6 months ago I stumbled across <a href="https://atom.io/" target="_blank" rel="external">Atom</a>, an editor still in beta from GitHub. It was promising an awesome packaging system, theme support, GitHub support baked in, and powered all by NodeJS and web technologies. At the time I was really getting into NodeJS and decided that I wanted to give it a try to see what it was capable of.</p>
+<a id="more"></a>
 <p><img src="/images/atom2.png" alt="Atom Screenshot" title="Atom Screenshot"></p>
 <p>Right out of the box Atom blew me away with an amazing packaging system. Within minutes I found a theme and syntax that I liked and all the comparable plugins I was using in Sublime 2. I felt at home with Atom as it was much like Sublime 2 and most the keyboard shortcuts were the same. It wasn’t till I started coding in an actual Git project that I realized I would not be going back to Sublime 2. It had built in Git support that I had never seen before, such as lines were colored that had been changed/added/deleted and the same thing with new/changed files/folders in the tree view.</p>
 <p>Atom recently released <a href="http://blog.atom.io/2015/06/25/atom-1-0.html" target="_blank" rel="external">version 1.0</a> and at this point I would recommend it to everyone. It is extremely stable and they have greatly improved the startup time and speed. I am excited to see what they do next with Atom, hopefully some more great baked in GitHub features and solving the problem of opening very large files (200MB+).</p>
@@ -75,9 +80,13 @@
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<center><img src="/images/atom.png" style="border:0px"></center>
+    <![CDATA[<center><img src="/images/atom.png" style="border:0px"/></center>
 
-<p>Coming from a background in Linux server administration, of course my f]]>
+<p>Coming from a background in Linux server administration, of course my first editor was Vim. I really like Vim as a basic editor, but when I started programing it really did not fit my needs. I realize that you can highly customize Vim and make it much like “modern” editors of today, this just seemed way to complex for me and I wanted something a bit more user friendly with mouse support.</p>
+<p>The editor everyone recommended to me was <a href="http://www.sublimetext.com/">Sublime 2</a>. I enjoyed the look and feel of Sublime, but it still did not seem as user friendly that I hoped. Even so, I decided to go ahead with it as it seemed to be the best option at that time.</p>
+<p>I used Sublime 2 as my primary editor for about 2 years. I had it very customized to my liking and I was very confortable with it. So changing editors at this point was not even on my radar.</p>
+<p>About 6 months ago I stumbled across <a href="https://atom.io/">Atom</a>, an editor still in beta from GitHub. It was promising an awesome packaging system, theme support, GitHub support baked in, and powered all by NodeJS and web technologies. At the time I was really getting into NodeJS and decided that I wanted to give it a try to see what it was capable of.</p>]]>
+    
     </summary>
     
       <category term="atom" scheme="http://mattpker.com/tags/atom/"/>
